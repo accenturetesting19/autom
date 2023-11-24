@@ -7,7 +7,7 @@ on:
       - master
 
 jobs:
-  updateAuthor:
+  AutomaticPR:
     runs-on: ubuntu-latest
     steps:
       - name: checking out code
@@ -20,7 +20,7 @@ jobs:
         run: echo ${{ env.GIT_COMMIT_AUTHOR_NAME }} > AUTHOR
 
       - name: Raise PR 1
-        id: demo-1
+        id: test-1
         uses: peter-evans/create-pull-request@v3
         with:
           branch: "dev"
@@ -38,14 +38,14 @@ jobs:
         uses: juliangruber/merge-pull-request-action@v1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          number: ${{ steps.demo-1.outputs.pull-request-number }}
+          number: ${{ steps.test-1.outputs.pull-request-number }}
           method: squash
 
       - name: Update author information again
         run: echo Sapna > AUTHOR
 
       - name: Raise PR 2
-        id: demo-2
+        id: test-2
         uses: peter-evans/create-pull-request@v3
         with:
           branch: "auto-pr-branch3"
@@ -63,5 +63,5 @@ jobs:
         uses: juliangruber/merge-pull-request-action@v1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          number: ${{ steps.demo-2.outputs.pull-request-number }}
+          number: ${{ steps.test-2.outputs.pull-request-number }}
           method: squash
