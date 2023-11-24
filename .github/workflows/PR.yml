@@ -3,7 +3,9 @@ name: demo for automatic PR
 on:
   push:
     branches:
+      -main
       -master
+      -dev
 jobs:
   UpdateAuthor:
     runs-on: ubuntu-latest
