@@ -49,7 +49,7 @@ jobs:
         id: demo-2
         uses: peter-evans/create-pull-request@v3
         with:
-          branch: "auto-pr-branch2"
+          branch: "auto-pr-branch3"
           base: master
           title: "demo for auto pr2"
           committer: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}">
