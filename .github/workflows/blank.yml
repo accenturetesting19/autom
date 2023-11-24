@@ -1,0 +1,32 @@
+# This is a basic workflow to help you get started with Actions
+
+name: demo for automatic PR
+
+on:
+  push:
+    branches:
+      -master
+jobs:
+  UpdateAuthor:
+    runs-on: ubuntu-latest
+    steps:
+      -name: checking out code
+       uses: actions/checkout@v2
+       
+       
+      -name: extract git commit data
+       uses: rlespinasse/git-commit-data-action@v1.x
+      -name: update author info
+       run: echo ${{env.GIT_COMMIT_AUTHOR_NAME }} > AUTHOR
+      -name: Raise PR
+       uses: peter-evans/create-pull-request@v3
+       with:
+         branch: "auto-pr-branch"
+         base: master
+         title: "demo for PR"
+         committer: ${{env.GIT_COMMIT_AUTHOR_NAME }} <${{env.GIT_COMMIT_AUTHOR_EMAIL }}">
+         author: ${{env.GIT_COMMIT_AUTHOR_NAME }} <${{env.GIT_COMMIT_AUTHOR_EMAIL }}">
+         body:
+            This is to show Automatic PR
+         token: ${{secrets.GITHUB_TOKEN }}
+         deletebranch: true
