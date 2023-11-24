@@ -33,13 +33,6 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           delete-branch: true
 
-      - name: Checkout
-        uses: actions/checkout@v1
-      - name: Approve Pull Request
-        uses: ./
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          number: 1
 
       - name: Merge Pull request1
         uses: juliangruber/merge-pull-request-action@v1
